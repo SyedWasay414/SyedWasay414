@@ -19,4 +19,6 @@ on:
 
   create: application/vnd.github.v3+json" \ /repos/OWNER/REPO/contents/PATH
     # Steps represent a sequence of tasks that will be executed as part of the job
-
+SELECT event as issue_status, COUNT(1000) as cnt FROM (SELECT type, repo.name, actor.login,JSON_EXTRACT(payload, '$.action') as event, FROM `githubarchive.day.20190101`WHERE type = 'IssuesEvent'
+)
+GROUP by issue_status;
